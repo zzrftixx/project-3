@@ -81,12 +81,9 @@
       </form>
       <!-- FORM SELESAI -->
 
-      <!-- Tombol Continue with Google (opsional) -->
+      <!-- Tombol Continue with Google -->
       <div class="mb-3">
-        <button 
-          class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center"
-          type="button"
-        >
+        <a href="{{ route('auth.google') }}" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center">
           <img 
             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" 
             alt="Google" 
@@ -94,7 +91,7 @@
             style="width: 20px;"
           />
           Continue with Google
-        </button>
+        </a>
       </div>
 
       <!-- Link Belum Punya Akun? -->

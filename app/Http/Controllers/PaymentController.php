@@ -175,7 +175,7 @@ class PaymentController extends Controller
         $params = [
             'transaction_details' => [
                 'order_id' => $orderId,
-                'gross_amount' => $total,
+                'gross_amount' => (int)$total, // konversi ke integer untuk IDR
             ],
             'callbacks' => [
                 'notification_url' => route('payment.callback'),
@@ -215,7 +215,7 @@ class PaymentController extends Controller
                 }
                 return [
                     'id' => $item->id,
-                    'price' => $item->price,
+                    'price' => (int)$item->price, // konversi ke integer untuk IDR
                     'quantity' => $item->quantity,
                     'name' => $name,
                 ];

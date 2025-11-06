@@ -8,9 +8,7 @@ class AddTotalToOrdersTable extends Migration
 {
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->decimal('total', 15, 2)->default(0)->after('user_id');
-        });
+        // Total column already added in create_orders_table
     }
 
     public function down()

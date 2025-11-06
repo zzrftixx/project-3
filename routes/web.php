@@ -88,6 +88,10 @@ Route::post('/payment/callback', [PaymentController::class, 'handleCallback'])->
         Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('reset.password');
         Route::post('/reset-password', [ForgotPasswordController::class, 'processReset'])->name('reset.password.post');
 
+        // Google OAuth
+        Route::get('/auth/google', [App\Http\Controllers\Auth\GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+        Route::get('/auth/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'handleGoogleCallback']);
+
 // ------------------- ADMIN ROUTES -------------------
 Route::delete('admin/databarang/bulk', [BarangController::class, 'bulkDestroy'])->name('admin.databarang.bulkDestroy');
 

@@ -13,47 +13,55 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Total stok semua barang
-        $totalStok = Barang::sum('stock');
+        $user = auth()->user();
 
-        // Total penjualan dari order yang selesai
-        $totalPenjualan = Order::where('status', 'completed')->sum('total');
+        if ($user->role === 'admin') {
+            // Admin dashboard
+            // Total stok semua barang
+            $totalStok = Barang::sum('stock');
 
-        // Penjualan 6 bulan terakhir
-        $penjualanBulanan = Order::select(
-                DB::raw('DATE_FORMAT(created_at, "%b %Y") as bulan'),
-                DB::raw('SUM(total) as total')
-            )
-            ->where('status', 'completed')
-            ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
-            ->groupBy('bulan')
-            ->orderByRaw('MIN(created_at)')
-            ->pluck('total', 'bulan')
-            ->toArray();
+            // Total penjualan dari order yang selesai
+            $totalPenjualan = Order::where('status', 'completed')->sum('total');
 
-        // Label dan data grafik
-        $labels = [];
-        $data = [];
-        for ($i = 6; $i >= 0; $i--) {
-            $label = Carbon::now()->subMonths($i)->format('M Y');
-            $labels[] = $label;
-            $data[] = $penjualanBulanan[$label] ?? 0;
+            // Total permintaan pemasangan
+            $permintaanPemasangan = InstallationRequest::count();
+
+            // Penjualan 6 bulan terakhir
+            $penjualanBulanan = Order::select(
+                    DB::raw('DATE_FORMAT(created_at, "%b %Y") as bulan'),
+                    DB::raw('SUM(total) as total')
+                )
+                ->where('status', 'completed')
+                ->where('created_at', '>=', Carbon::now()->subMonths(6)->startOfMonth())
+                ->groupBy('bulan')
+                ->orderByRaw('MIN(created_at)')
+                ->pluck('total', 'bulan')
+                ->toArray();
+
+            // Label dan data grafik
+            $labels = [];
+            $data = [];
+            for ($i = 6; $i >= 0; $i--) {
+                $label = Carbon::now()->subMonths($i)->format('M Y');
+                $labels[] = $label;
+                $data[] = $penjualanBulanan[$label] ?? 0;
+            }
+
+            // Ambil data penjualan terbaru
+            $laporan = $this->getRecentPurchases();
+
+            return view('admin.dashboard', compact(
+                'totalStok',
+                'totalPenjualan',
+                'permintaanPemasangan',
+                'labels',
+                'data',
+                'laporan'
+            ));
+        } else {
+            // User dashboard
+            return view('dashboard');
         }
-
-        // Ambil data penjualan terbaru
-        $laporan = $this->getRecentPurchases();
-
-        // Hitung permintaan pemasangan
-        $permintaanPemasangan = InstallationRequest::count();
-
-        return view('admin.dashboard', compact(
-            'totalStok',
-            'totalPenjualan',
-            'labels',
-            'data',
-            'laporan',
-            'permintaanPemasangan'
-        ));
     }
 
     /**

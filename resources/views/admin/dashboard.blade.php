@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="min-h-screen bg-slate-50" style='font-family: Inter, "Noto Sans", sans-serif;'>
+  
   <!-- Header -->
   <div class="flex flex-wrap justify-between gap-3 p-4">
     <p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight min-w-72">Dashboard</p>
@@ -92,13 +93,9 @@
         </tr>
     @endforelse
     </tbody>
-
-
       </table>
     </div>
   </div>
-
-  
 
   <!-- Charts Section -->
   <h2 class="text-[#0d151c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Grafik Penjualan dan Produk</h2>

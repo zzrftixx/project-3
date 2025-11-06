@@ -1,17 +1,19 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+@section('content')
+<div class="min-h-screen bg-slate-50" style='font-family: Inter, "Noto Sans", sans-serif;'>
+  <!-- Header -->
+  <div class="flex flex-wrap justify-between gap-3 p-4">
+    <p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight min-w-72">Dashboard</p>
+  </div>
+
+  <!-- Welcome Message -->
+  <div class="px-4 py-3">
+    <div class="flex overflow-hidden rounded-xl border border-[#cedce8] bg-white shadow-sm">
+      <div class="p-6 text-gray-900">
+        {{ __("You're logged in!") }}
+      </div>
     </div>
-</x-app-layout>
+  </div>
+</div>
+@endsection

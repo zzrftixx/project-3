@@ -107,9 +107,6 @@
 
     {{-- Tombol Bulk Delete (disabled kalau belum ada yang dicentang) --}}
 
-
-
-
     <!-- Tabel Barang dengan Desain Clean -->
     <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
       <!-- Header Bagian Table -->
@@ -209,7 +206,6 @@
     @endforeach
   </tbody>
 </table>
-
       </div>
       
       <!-- Empty State jika tidak ada barang -->

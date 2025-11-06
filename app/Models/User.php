@@ -10,14 +10,17 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\CartItem;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVerifyEmail
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'role',
-        
+        'google_id',
+        'email_verified_at',
     ];
 
     public function orders()

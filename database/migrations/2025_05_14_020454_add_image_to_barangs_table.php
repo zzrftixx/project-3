@@ -8,9 +8,7 @@ class AddImageToBarangsTable extends Migration
 {
     public function up()
     {
-        Schema::table('barangs', function (Blueprint $table) {
-            $table->string('image')->nullable()->after('description'); // Kolom nullable
-        });
+        // Image column already added in another migration
     }
 
     public function down()
